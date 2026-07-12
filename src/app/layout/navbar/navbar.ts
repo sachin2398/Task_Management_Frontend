@@ -50,6 +50,12 @@ export class Navbar implements OnInit {
       next: () => {
         this.auth.clearUser();
         this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        console.error('Logout API failed:', err);
+        // Fallback: clear local state and navigate to login anyway
+        this.auth.clearUser();
+        this.router.navigate(['/login']);
       }
     });
   }
