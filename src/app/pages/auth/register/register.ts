@@ -25,6 +25,8 @@ import { AuthService } from '../../../services/auth.service';
 
 import { AuthStateService } from '../../../core/auth-state.service';
 
+import { ToastService } from '../../../core/toast.service';
+
 @Component({
 
   selector: 'app-register',
@@ -65,7 +67,9 @@ export class Register {
 
     private authState: AuthStateService,
 
-    private router: Router
+    private router: Router,
+
+    private toastService: ToastService
 
   ) {
 
@@ -157,6 +161,8 @@ export class Register {
 
           this.authState.setUser(response.data);
 
+          this.toastService.success('Registration successful!');
+
           this.router.navigate(['/dashboard']);
 
         },
@@ -165,7 +171,17 @@ export class Register {
 
           this.loading = false;
 
-          alert(error.error.message);
+          let msg = 'Registration failed';
+          if (error.error?.message) {
+            msg = error.error.message;
+          } else if (error.error?.errors && Array.isArray(error.error.errors)) {
+            msg = error.error.errors.map((e: any) => e.msg).join(', ');
+          } else if (typeof error.error === 'string') {
+            msg = error.error;
+          } else if (error.message) {
+            msg = error.message;
+          }
+          this.toastService.error(msg);
 
         }
 
