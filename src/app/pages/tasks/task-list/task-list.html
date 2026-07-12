@@ -1,0 +1,125 @@
+<div class="task-list-page">
+  <div class="page-header fade-in">
+    <div>
+      <h1 class="page-title">Tasks</h1>
+      <p class="page-subtitle">Manage and track your tasks.</p>
+    </div>
+    <div class="header-actions">
+      <a routerLink="/tasks/create" class="btn-primary new-task-btn">
+        <i class="bi bi-plus-lg"></i> New Task
+      </a>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="spinner"></div>
+  } @else {
+    <div class="stats-row fade-in">
+      <div class="stat-mini">
+        <div class="stat-mini-info">
+          <span>Total Tasks</span>
+          <h4>{{ totalCount() }}</h4>
+        </div>
+        <div class="stat-mini-icon text-primary bg-primary-glow"><i class="bi bi-list-task"></i></div>
+      </div>
+      <div class="stat-mini">
+        <div class="stat-mini-info">
+          <span>Pending</span>
+          <h4>{{ pendingCount() }}</h4>
+        </div>
+        <div class="stat-mini-icon text-warning bg-warning-glow"><i class="bi bi-hourglass-split"></i></div>
+      </div>
+      <div class="stat-mini">
+        <div class="stat-mini-info">
+          <span>Completed</span>
+          <h4>{{ completedCount() }}</h4>
+        </div>
+        <div class="stat-mini-icon text-success bg-success-glow"><i class="bi bi-check2-circle"></i></div>
+      </div>
+    </div>
+
+    <div class="dark-card fade-in task-table-container">
+      <div class="filters-bar">
+        <div class="search-box">
+          <i class="bi bi-search"></i>
+          <input type="text" class="form-control" placeholder="Search tasks..." [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)">
+        </div>
+        <div class="status-filter">
+          <select class="form-select" [ngModel]="statusFilter()" (ngModelChange)="statusFilter.set($event)">
+            <option value="All">All Statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+      </div>
+
+      @if (filteredTasks().length === 0) {
+        <div class="empty-state">
+          <i class="bi bi-search"></i>
+          <h3>No tasks found</h3>
+          <p>Try adjusting your search or filters.</p>
+        </div>
+      } @else {
+        <div class="table-responsive">
+          <table class="dark-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th class="hide-mobile">Description</th>
+                <th>Status</th>
+                <th>Assigned To</th>
+                <th class="hide-sm">Created By</th>
+                <th class="hide-sm">Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (task of filteredTasks(); track task._id) {
+                <tr>
+                  <td class="font-medium">{{ task.title }}</td>
+                  <td class="hide-mobile text-muted-custom truncate-text" [title]="task.description">
+                    {{ task.description }}
+                  </td>
+                  <td>
+                    <span class="badge" [ngClass]="task.status === 'Completed' ? 'badge-completed' : 'badge-pending'">
+                      {{ task.status }}
+                    </span>
+                  </td>
+                  <td>
+                    @if (task.assignedTo) {
+                      <div class="user-cell">
+                        <div class="avatar-sm">{{ (task.assignedTo.username ?? task.assignedTo.name ?? 'U')[0] | uppercase }}</div>
+                        <span>{{ task.assignedTo.username ?? task.assignedTo.name ?? 'Unknown' }}</span>
+                      </div>
+                    } @else {
+                      <span class="text-muted-custom">Unassigned</span>
+                    }
+                  </td>
+                  <td class="hide-sm">
+                    @if (task.createdBy) {
+                      <span class="text-muted-custom">{{ task.createdBy.username ?? task.createdBy.name ?? 'Unknown' }}</span>
+                    }
+                  </td>
+                  <td class="hide-sm text-muted-custom">{{ task.createdAt | date:'shortDate' }}</td>
+                  <td>
+                    <div class="action-buttons">
+                      <button class="action-btn action-btn-status" (click)="toggleStatus(task)" [title]="task.status === 'Pending' ? 'Mark Completed' : 'Mark Pending'">
+                        <i class="bi" [ngClass]="task.status === 'Pending' ? 'bi-check-lg' : 'bi-arrow-counterclockwise'"></i>
+                      </button>
+                      <a [routerLink]="['/tasks/edit', task._id]" class="action-btn action-btn-edit" title="Edit">
+                        <i class="bi bi-pencil"></i>
+                      </a>
+                      <button class="action-btn action-btn-delete" (click)="deleteTask(task._id)" title="Delete">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  }
+</div>

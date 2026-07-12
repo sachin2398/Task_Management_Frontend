@@ -1,0 +1,267 @@
+
+
+.task-container {
+
+    min-height: calc(100vh - 70px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    padding: 40px 20px;
+
+    background: #111827;
+
+}
+
+
+
+.task-card {
+
+    width: 100%;
+
+    max-width: 850px;
+
+    background: #1E293B;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    border: 1px solid #334155;
+
+    box-shadow: 0 12px 35px rgba(0,0,0,.35);
+
+}
+
+
+
+.card-header {
+
+    margin-bottom: 30px;
+
+}
+
+.card-header h2 {
+
+    color: #F8FAFC;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+}
+
+.card-header p {
+
+    color: #94A3B8;
+
+    margin: 0;
+
+}
+
+
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 24px;
+
+}
+
+label {
+
+    color: white;
+
+    margin-bottom: 10px;
+
+    font-weight: 600;
+
+}
+
+input,
+textarea,
+select {
+
+    width: 100%;
+
+    padding: 14px 16px;
+
+    background: #0F172A;
+
+    border: 1px solid #334155;
+
+    border-radius: 10px;
+
+    color: white;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: .3s;
+
+}
+
+textarea {
+
+    resize: vertical;
+
+    min-height: 130px;
+
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+
+    border-color: #10B981;
+
+    box-shadow: 0 0 0 3px rgba(16,185,129,.15);
+
+}
+
+
+
+input::placeholder,
+textarea::placeholder {
+
+    color: #64748B;
+
+}
+
+
+
+small {
+
+    color: #EF4444;
+
+    margin-top: 6px;
+
+}
+
+
+
+.btn-group {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 15px;
+
+    margin-top: 35px;
+
+}
+
+.btn-cancel {
+
+    padding: 13px 24px;
+
+    border-radius: 10px;
+
+    border: 1px solid #475569;
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.btn-cancel:hover {
+
+    background: #334155;
+
+}
+
+.btn-save {
+
+    padding: 13px 28px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #10B981;
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.btn-save:hover {
+
+    background: #059669;
+
+}
+
+.btn-save:disabled {
+
+    opacity: .7;
+
+    cursor: not-allowed;
+
+}
+
+
+
+select option {
+
+    background: #0F172A;
+
+    color: white;
+
+}
+
+
+
+@media(max-width:768px){
+
+.task-container{
+
+padding:20px;
+
+}
+
+.task-card{
+
+padding:22px;
+
+}
+
+.card-header h2{
+
+font-size:24px;
+
+}
+
+.btn-group{
+
+flex-direction:column;
+
+}
+
+.btn-save,
+.btn-cancel{
+
+width:100%;
+
+}
+
+}

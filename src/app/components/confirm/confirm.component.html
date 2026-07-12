@@ -1,0 +1,17 @@
+@if (confirmService.isOpen()) {
+  <div class="confirm-backdrop fade-in">
+    <div class="confirm-dialog">
+      <div class="confirm-icon">
+        <i class="bi bi-exclamation-triangle"></i>
+      </div>
+      <div class="confirm-content">
+        <h3>Are you sure?</h3>
+        <p>{{ confirmService.message() }}</p>
+      </div>
+      <div class="confirm-actions">
+        <button class="btn-cancel" (click)="confirmService.onCancel()">Cancel</button>
+        <button class="btn-danger" (click)="confirmService.onConfirm()">Delete</button>
+      </div>
+    </div>
+  </div>
+}

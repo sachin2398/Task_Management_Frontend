@@ -1,0 +1,84 @@
+.confirm-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-dialog {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  animation: scaleIn 0.3s ease;
+}
+
+.confirm-icon {
+  font-size: 48px;
+  color: var(--danger);
+  margin-bottom: 16px;
+}
+
+.confirm-content h3 {
+  margin: 0 0 10px 0;
+  font-size: 22px;
+  color: var(--text);
+}
+
+.confirm-content p {
+  color: var(--text-light);
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text);
+  padding: 10px 24px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-danger {
+  background: var(--danger);
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-danger:hover {
+  background: var(--danger-hover);
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

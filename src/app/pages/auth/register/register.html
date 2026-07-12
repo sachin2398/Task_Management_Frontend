@@ -1,0 +1,237 @@
+<div class="login-page">
+
+    <!-- LEFT SIDE -->
+
+    <div class="left-side">
+
+        <div class="grid"></div>
+
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
+
+        <div class="content">
+
+            <div class="logo">
+
+                <i class="bi bi-kanban-fill"></i>
+
+                <span>TaskFlow</span>
+
+            </div>
+
+            <h1>
+
+                Build.
+                <br>
+
+                Collaborate.
+                <br>
+
+                Grow.
+
+            </h1>
+
+            <p>
+
+                Join TaskFlow and manage projects,
+                teams and tasks efficiently.
+
+            </p>
+
+            <div class="feature">
+
+                <i class="bi bi-check-circle-fill"></i>
+
+                Public Registration
+
+            </div>
+
+            <div class="feature">
+
+                <i class="bi bi-people-fill"></i>
+
+                Role Based Access
+
+            </div>
+
+            <div class="feature">
+
+                <i class="bi bi-lightning-fill"></i>
+
+                Real Time Collaboration
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="right-side">
+
+        <div class="login-card">
+
+            <div class="login-icon">
+
+                <i class="bi bi-person-plus-fill"></i>
+
+            </div>
+
+            <h2>Create Account</h2>
+
+            <p>Create your account to continue</p>
+
+            <form
+                [formGroup]="registerForm"
+                (ngSubmit)="onSubmit()">
+
+                <!-- Username -->
+
+                <div class="mb-3">
+
+                    <label>Username</label>
+
+                    <input
+                        class="form-control"
+                        formControlName="username"
+                        placeholder="Enter username">
+
+                    @if(registerForm.controls['username'].touched &&
+                    registerForm.controls['username'].invalid){
+
+                    <small class="text-danger">
+
+                        Username must be at least 3 characters.
+
+                    </small>
+
+                    }
+
+                </div>
+
+                <!-- Email -->
+
+                <div class="mb-3">
+
+                    <label>Email</label>
+
+                    <input
+                        class="form-control"
+                        formControlName="email"
+                        placeholder="Enter email">
+
+                    @if(registerForm.controls['email'].touched &&
+                    registerForm.controls['email'].invalid){
+
+                    <small class="text-danger">
+
+                        Valid email is required.
+
+                    </small>
+
+                    }
+
+                </div>
+
+                <!-- Password -->
+
+                <div class="mb-3">
+
+                    <label>Password</label>
+
+                    <div class="password-box">
+
+                        <input
+                            [type]="hidePassword ? 'password':'text'"
+                            class="form-control"
+                            formControlName="password"
+                            placeholder="Password">
+
+                        <i
+                            class="bi"
+                            [class.bi-eye]="hidePassword"
+                            [class.bi-eye-slash]="!hidePassword"
+                            (click)="togglePassword()">
+
+                        </i>
+
+                    </div>
+
+                    @if(registerForm.controls['password'].touched &&
+                    registerForm.controls['password'].invalid){
+
+                    <small class="text-danger">
+
+                        Password must be at least 6 characters.
+
+                    </small>
+
+                    }
+
+                </div>
+
+                <!-- Role -->
+
+                <div class="mb-4">
+
+                    <label>Role</label>
+
+                    <select
+                        class="form-select"
+                        formControlName="role">
+
+                         <option value="" disabled selected>
+            Select Role
+        </option>
+
+                        <option value="Manager">Manager</option>
+
+                        <option value="TeamLead">Team Lead</option>
+
+                        <option value="Employee">Employee</option>
+
+                    </select>
+                      @if (
+        registerForm.controls['role'].touched &&
+        registerForm.controls['role'].hasError('required')
+    ) {
+
+        <small class="text-danger">
+
+            Please select a role.
+
+        </small>
+
+    }
+
+                </div>
+
+                <button
+                    class="btn btn-primary w-100"
+                    type="submit">
+
+                    Create Account
+
+                </button>
+
+            </form>
+
+            <div class="register">
+
+                Already have an account?
+
+                <a routerLink="/login">
+
+                    Login
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

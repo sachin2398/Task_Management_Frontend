@@ -1,0 +1,97 @@
+<div class="user-list-page">
+  <div class="page-header fade-in">
+    <div>
+      <h1 class="page-title">Users</h1>
+      <p class="page-subtitle">Manage your team members and access levels.</p>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="spinner"></div>
+  } @else {
+    <div class="stats-row fade-in">
+      <div class="stat-mini">
+        <div class="stat-mini-info">
+          <span>Total Users</span>
+          <h4>{{ totalCount() }}</h4>
+        </div>
+        <div class="stat-mini-icon text-primary bg-primary-glow"><i class="bi bi-people"></i></div>
+      </div>
+      @if (auth.role() === 'Manager') {
+        <div class="stat-mini">
+          <div class="stat-mini-info">
+            <span>Managers</span>
+            <h4>{{ managerCount() }}</h4>
+          </div>
+          <div class="stat-mini-icon text-purple bg-purple-glow"><i class="bi bi-shield-check"></i></div>
+        </div>
+        <div class="stat-mini">
+          <div class="stat-mini-info">
+            <span>Team Leads</span>
+            <h4>{{ teamLeadCount() }}</h4>
+          </div>
+          <div class="stat-mini-icon text-info bg-info-glow"><i class="bi bi-person-gear"></i></div>
+        </div>
+      }
+      <div class="stat-mini">
+        <div class="stat-mini-info">
+          <span>Employees</span>
+          <h4>{{ employeeCount() }}</h4>
+        </div>
+        <div class="stat-mini-icon text-success bg-success-glow"><i class="bi bi-person-workspace"></i></div>
+      </div>
+    </div>
+
+    <div class="dark-card fade-in user-table-container">
+      <div class="filters-bar">
+        <div class="search-box">
+          <i class="bi bi-search"></i>
+          <input type="text" class="form-control" placeholder="Search users by name, email, or role..." [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)">
+        </div>
+      </div>
+
+      @if (filteredUsers().length === 0) {
+        <div class="empty-state">
+          <i class="bi bi-search"></i>
+          <h3>No users found</h3>
+          <p>Try adjusting your search criteria.</p>
+        </div>
+      } @else {
+        <div class="table-responsive">
+          <table class="dark-table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th class="hide-mobile">Email</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (user of filteredUsers(); track $index) {
+                <tr>
+                  <td>
+                    <div class="user-cell">
+                      <div class="avatar-sm">{{ (user.username ?? user.name ?? 'U')[0] | uppercase }}</div>
+                      <span class="font-medium">{{ user.username ?? user.name ?? 'Unknown' }}</span>
+                    </div>
+                  </td>
+                  <td class="hide-mobile text-muted-custom">{{ user.email }}</td>
+                  <td>
+                    <span class="badge" 
+                          [ngClass]="{
+                            'badge-manager': user.role === 'Manager',
+                            'badge-teamlead': user.role === 'TeamLead',
+                            'badge-employee': user.role === 'Employee'
+                          }">
+                      {{ user.role }}
+                    </span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  }
+</div>

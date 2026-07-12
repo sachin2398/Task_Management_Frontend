@@ -1,0 +1,160 @@
+
+
+.overlay {
+  display: none;
+}
+
+
+
+aside {
+  width: 260px;
+  min-width: 260px;
+  background: #020617;
+  border-right: 1px solid #1E293B;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+
+
+.sidebar-header {
+  padding: 28px 24px;
+  border-bottom: 1px solid rgba(30, 41, 59, .6);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo i {
+  font-size: 30px;
+  color: #10B981;
+}
+
+.logo span {
+  font-size: 24px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -.3px;
+}
+
+
+
+nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 14px;
+  overflow-y: auto;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #94A3B8;
+  text-decoration: none;
+  padding: 13px 18px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all .25s ease;
+  position: relative;
+}
+
+nav a i {
+  font-size: 20px;
+  width: 22px;
+  text-align: center;
+  transition: color .25s ease;
+}
+
+nav a:hover {
+  background: rgba(30, 41, 59, .7);
+  color: #E2E8F0;
+}
+
+nav a:hover i {
+  color: #10B981;
+}
+
+
+
+nav a.active {
+  background: linear-gradient(135deg, rgba(16, 185, 129, .15), rgba(16, 185, 129, .08));
+  color: #10B981;
+  font-weight: 600;
+}
+
+nav a.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: #10B981;
+  border-radius: 0 4px 4px 0;
+}
+
+nav a.active i {
+  color: #10B981;
+}
+
+
+
+.sidebar-footer {
+  padding: 20px 24px;
+  border-top: 1px solid rgba(30, 41, 59, .6);
+}
+
+.role-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(16, 185, 129, .08);
+  border-radius: 10px;
+  color: #10B981;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.role-info i {
+  font-size: 16px;
+}
+
+
+
+@media (max-width: 992px) {
+
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .6);
+    z-index: 998;
+    backdrop-filter: blur(4px);
+  }
+
+  aside {
+    position: fixed;
+    left: -280px;
+    top: 0;
+    z-index: 999;
+    transition: left .3s ease;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, .4);
+  }
+
+  aside.open {
+    left: 0;
+  }
+
+}

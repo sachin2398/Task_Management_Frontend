@@ -1,0 +1,52 @@
+<!-- Mobile Overlay -->
+@if (!collapsed()) {
+<div class="overlay" (click)="onOverlayClick()"></div>
+}
+
+<aside [class.open]="!collapsed()">
+
+  <div class="sidebar-header">
+
+    <div class="logo">
+
+      <i class="bi bi-kanban-fill"></i>
+
+      <span>TaskFlow</span>
+
+    </div>
+
+  </div>
+
+  <nav>
+
+    @for (menu of menus(); track menu.title) {
+
+    <a
+      [routerLink]="menu.route"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: menu.route === '/dashboard' }"
+      (click)="closeSidebar.emit()">
+
+      <i class="bi" [ngClass]="menu.icon"></i>
+
+      <span>{{ menu.title }}</span>
+
+    </a>
+
+    }
+
+  </nav>
+
+  <div class="sidebar-footer">
+
+    <div class="role-info">
+
+      <i class="bi bi-shield-check"></i>
+
+      <span>{{ auth.role() }}</span>
+
+    </div>
+
+  </div>
+
+</aside>

@@ -1,0 +1,169 @@
+/* =========================================
+   HEADER
+========================================= */
+
+header {
+  height: 68px;
+  background: #1E293B;
+  border-bottom: 1px solid #334155;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 28px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* =========================================
+   LEFT
+========================================= */
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: #94A3B8;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: .25s;
+}
+
+.hamburger:hover {
+  background: rgba(255, 255, 255, .06);
+  color: white;
+}
+
+.brand {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand i {
+  font-size: 22px;
+  color: #10B981;
+}
+
+.brand span {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+}
+
+
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: auto;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #10B981, #059669);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.username {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.user-text .badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  width: fit-content;
+}
+
+
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: rgba(239, 68, 68, .1);
+  color: #F87171;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: .25s;
+}
+
+.logout-btn:hover {
+  background: rgba(239, 68, 68, .2);
+  color: #FCA5A5;
+}
+
+.logout-btn i {
+  font-size: 18px;
+}
+
+
+
+@media (max-width: 992px) {
+
+  .hamburger {
+    display: flex;
+  }
+
+  .brand {
+    display: flex;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  header {
+    padding: 0 16px;
+  }
+
+  .user-text {
+    display: none;
+  }
+
+  .logout-text {
+    display: none;
+  }
+
+  .logout-btn {
+    padding: 10px;
+  }
+
+}

@@ -1,0 +1,149 @@
+<div class="dashboard-page">
+  <div class="page-header fade-in">
+    <div>
+      <h1 class="page-title">Welcome back, {{ auth.username() }}!</h1>
+      <p class="page-subtitle">Here's what's happening with your tasks today.</p>
+    </div>
+    <div class="header-actions">
+      <a routerLink="/tasks/create" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 0 20px;">
+        <i class="bi bi-plus-lg"></i> New Task
+      </a>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="spinner"></div>
+  } @else {
+    <div class="stats-grid fade-in">
+      <div class="stat-card">
+        <div class="stat-icon bg-primary-glow text-primary">
+          <i class="bi bi-list-task"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Total Tasks</h3>
+          <h2>{{ totalTasks() }}</h2>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon bg-warning-glow text-warning">
+          <i class="bi bi-hourglass-split"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Pending</h3>
+          <h2>{{ pendingTasks() }}</h2>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon bg-success-glow text-success">
+          <i class="bi bi-check2-circle"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Completed</h3>
+          <h2>{{ completedTasks() }}</h2>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon bg-purple-glow text-purple">
+          <i class="bi bi-shield-check"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Role</h3>
+          <h2>{{ auth.role() }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-content fade-in">
+      <div class="recent-tasks-section dark-card">
+        <div class="section-header">
+          <h2>Recent Tasks</h2>
+          <a routerLink="/tasks" class="view-all">View All</a>
+        </div>
+        
+        @if (recentTasks().length === 0) {
+          <div class="empty-state">
+            <i class="bi bi-inbox"></i>
+            <h3>No tasks found</h3>
+            <p>You don't have any tasks assigned yet.</p>
+          </div>
+        } @else {
+          <div class="table-responsive">
+            <table class="dark-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Status</th>
+                  <th>Created Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (task of recentTasks(); track task._id) {
+                  <tr>
+                    <td class="font-medium">{{ task.title }}</td>
+                    <td>
+                      <span class="badge" [ngClass]="task.status === 'Completed' ? 'badge-completed' : 'badge-pending'">
+                        {{ task.status }}
+                      </span>
+                    </td>
+                    <td class="text-muted-custom">{{ task.createdAt | date:'mediumDate' }}</td>
+                    <td>
+                      <a [routerLink]="['/tasks/edit', task._id]" class="action-btn action-btn-edit" title="Edit">
+                        <i class="bi bi-pencil"></i>
+                      </a>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+
+      <div class="quick-actions-section dark-card">
+        <div class="section-header">
+          <h2>Quick Actions</h2>
+        </div>
+        <div class="action-list">
+          <a routerLink="/tasks/create" class="action-item">
+            <div class="action-icon bg-primary-glow text-primary">
+              <i class="bi bi-plus-lg"></i>
+            </div>
+            <div class="action-text">
+              <h4>Create Task</h4>
+              <p>Add a new task</p>
+            </div>
+            <i class="bi bi-chevron-right action-arrow"></i>
+          </a>
+          
+          <a routerLink="/tasks" class="action-item">
+            <div class="action-icon bg-info-glow text-info">
+              <i class="bi bi-list-check"></i>
+            </div>
+            <div class="action-text">
+              <h4>View Tasks</h4>
+              <p>See all your tasks</p>
+            </div>
+            <i class="bi bi-chevron-right action-arrow"></i>
+          </a>
+          
+          @if (auth.role() === 'Manager' || auth.role() === 'TeamLead') {
+            <a routerLink="/users" class="action-item">
+              <div class="action-icon bg-purple-glow text-purple">
+                <i class="bi bi-people"></i>
+              </div>
+              <div class="action-text">
+                <h4>Manage Users</h4>
+                <p>View your team members</p>
+              </div>
+              <i class="bi bi-chevron-right action-arrow"></i>
+            </a>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>

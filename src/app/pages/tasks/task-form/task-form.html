@@ -1,0 +1,185 @@
+<div class="task-container">
+
+    <div class="task-card">
+
+        <div class="card-header">
+
+            <h2>
+
+                {{ isEditMode ? 'Edit Task' : 'Create Task' }}
+
+            </h2>
+
+            <p>
+
+                {{ isEditMode
+                ? 'Update your existing task'
+                : 'Create a new task' }}
+
+            </p>
+
+        </div>
+
+        <form
+            [formGroup]="taskForm"
+            (ngSubmit)="onSubmit()">
+
+            <!-- Title -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Task Title
+
+                </label>
+
+                <input
+                    type="text"
+                    formControlName="title"
+                    placeholder="Enter task title">
+
+                @if(submitted &&
+                taskForm.controls.title.invalid){
+
+                <small>
+
+                    Title is required (minimum 3 characters)
+
+                </small>
+
+                }
+
+            </div>
+
+            <!-- Description -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Description
+
+                </label>
+
+                <textarea
+                    rows="5"
+                    formControlName="description"
+                    placeholder="Write task description">
+
+                </textarea>
+
+                @if(submitted &&
+                taskForm.controls.description.invalid){
+
+                <small>
+
+                    Description is required.
+
+                </small>
+
+                }
+
+            </div>
+
+            <!-- Status -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Status
+
+                </label>
+
+                <select formControlName="status">
+
+                    <option value="Pending">
+
+                        Pending
+
+                    </option>
+
+                    <option value="Completed">
+
+                        Completed
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- Assign User -->
+
+            @if(auth.role() !== 'Employee'){
+
+            <div class="form-group">
+
+                <label>
+
+                    Assign User
+
+                </label>
+
+                <select
+                    formControlName="assignedTo">
+
+                    <option value="">
+
+                        Select User
+
+                    </option>
+
+                    @for(user of users;track user._id){
+
+                    <option
+                        [value]="user._id">
+
+                        {{user.username || user.name}}
+
+                        ({{user.role}})
+
+                    </option>
+
+                    }
+
+                </select>
+
+            </div>
+
+            }
+
+            <!-- Buttons -->
+
+            <div class="btn-group">
+
+                <button
+                    type="button"
+                    class="btn-cancel"
+                    routerLink="/tasks">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-save"
+                    [disabled]="loading">
+
+                    {{loading
+                    ? 'Saving...'
+                    : (isEditMode
+                    ? 'Update Task'
+                    : 'Create Task')}}
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

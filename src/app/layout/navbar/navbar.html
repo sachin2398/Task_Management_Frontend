@@ -1,0 +1,55 @@
+<header>
+
+  <div class="nav-left">
+
+    <button class="hamburger" (click)="toggleSidebar.emit()">
+
+      <i class="bi bi-list"></i>
+
+    </button>
+
+    <div class="brand">
+
+      <i class="bi bi-kanban-fill"></i>
+
+      <span>TaskFlow</span>
+
+    </div>
+
+  </div>
+
+  <div class="nav-right">
+
+    <div class="user-info">
+
+      <div class="avatar">
+
+        {{ getInitials() }}
+
+      </div>
+
+      <div class="user-text">
+
+        <div class="username">{{ auth.username() }}</div>
+
+        <span class="badge" [ngClass]="getRoleBadgeClass()">
+
+          {{ auth.role() }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+    <button class="logout-btn" (click)="logout()" title="Logout">
+
+      <i class="bi bi-box-arrow-right"></i>
+
+      <span class="logout-text">Logout</span>
+
+    </button>
+
+  </div>
+
+</header>
