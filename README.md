@@ -3,6 +3,7 @@
 A modern Task Management web application built with **Angular 21** using Standalone Components, Signals, Reactive Forms, and Role-Based Authentication.
 
 The application provides a clean, responsive user interface that enables Managers, Team Leads, and Employees to collaborate efficiently while enforcing role-based access control.
+<img width="1918" height="907" alt="image" src="https://github.com/user-attachments/assets/e4912828-9093-41e1-8e35-1c3db05960c3" />
 
 
 
@@ -23,8 +24,8 @@ The application provides a clean, responsive user interface that enables Manager
 ---
 
 ### Dashboard
-
 <img width="1918" height="912" alt="image" src="https://github.com/user-attachments/assets/f74bfd1f-45bb-47ec-b60b-83759f35bb60" />
+
 
 - Responsive Dashboard
 - Sidebar Navigation
